@@ -1,11 +1,10 @@
 # currency_savings_bot.py
 
+import os
+import json
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-import json
-import os
 
-# Хранилище данных (в файле)
 DATA_FILE = "savings_data.json"
 
 def load_data():
@@ -92,18 +91,20 @@ async def reset(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Нет данных для удаления")
 
-# Основной запуск
-import os
-from telegram.ext import ApplicationBuilder
-
-TOKEN = os.environ["BOT_TOKEN"]
-app = ApplicationBuilder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("add", add))
-app.add_handler(CommandHandler("balance", balance))
-app.add_handler(CommandHandler("forecast", forecast))
-app.add_handler(CommandHandler("reset", reset))
-
 if __name__ == '__main__':
+    from telegram.ext import Application
+
+    TOKEN = os.environ.get("BOT_TOKEN")
+    if not TOKEN:
+        raise ValueError("❌ Переменная окружения BOT_TOKEN не найдена!")
+
+    app = ApplicationBuilder().token(TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("add", add))
+    app.add_handler(CommandHandler("balance", balance))
+    app.add_handler(CommandHandler("forecast", forecast))
+    app.add_handler(CommandHandler("reset", reset))
+
     print("Бот запущен...")
     app.run_polling()
