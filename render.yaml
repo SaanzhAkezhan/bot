@@ -6,3 +6,6 @@ services:
     startCommand: python currency_savings_bot.py
     plan: free
     autoDeploy: true
+buildCommand: |
+  chmod +x force-reinstall.sh
+  ./force-reinstall.sh
