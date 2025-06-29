@@ -2,7 +2,7 @@ services:
   - type: web
     name: currency-savings-bot
     env: python
-    buildCommand: ""
+    buildCommand: pip install -r requirements.txt
     startCommand: python currency_savings_bot.py
     plan: free
     autoDeploy: true
