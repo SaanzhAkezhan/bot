@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: currency-savings-bot
+    env: python
+    buildCommand: ""
+    startCommand: python currency_savings_bot.py
+    plan: free
+    autoDeploy: true
