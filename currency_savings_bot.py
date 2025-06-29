@@ -94,7 +94,9 @@ async def reset(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Основной запуск
 import os
-TOKEN = os.environ.get("8148367012:AAGLl9ggsm-gPUccitdNWGtKKv9QK_AesdU")
+from telegram.ext import ApplicationBuilder
+
+TOKEN = os.environ["BOT_TOKEN"]
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("add", add))
