@@ -2,10 +2,8 @@ services:
   - type: web
     name: currency-savings-bot
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      chmod +x force-reinstall.sh
+      ./force-reinstall.sh
     startCommand: python currency_savings_bot.py
     plan: free
-    autoDeploy: true
-buildCommand: |
-  chmod +x force-reinstall.sh
-  ./force-reinstall.sh
